@@ -87,6 +87,14 @@
       font-weight: 700;
     }
 
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
     .nav-links {
       display: flex;
       gap: 20px;
@@ -97,6 +105,34 @@
     }
 
     .nav-links a:hover { color: var(--text); }
+
+    .lang-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      border-radius: 999px;
+      padding: 5px;
+    }
+
+    .lang-btn {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 8px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .18s ease, color .18s ease;
+    }
+
+    .lang-btn.active {
+      background: linear-gradient(135deg, var(--accent), var(--accent-3));
+      color: #fff;
+    }
 
     .btn {
       display: inline-flex;
@@ -392,16 +428,18 @@
       }
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 760px) {
       .nav-inner {
         align-items: flex-start;
         flex-direction: column;
       }
-
+      .nav-right {
+        width: 100%;
+        justify-content: space-between;
+      }
       .nav-links {
         gap: 14px;
       }
-
       .hero {
         padding-top: 56px;
       }
@@ -414,12 +452,18 @@
       <a class="brand" href="#top">
         <div class="brand-wordmark">telebotix <span>studio</span></div>
       </a>
-      <nav class="nav-links">
-        <a href="#services">Services</a>
-        <a href="#how">How it works</a>
-        <a href="#cases">Use cases</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      <div class="nav-right">
+        <nav class="nav-links">
+          <a href="#services" data-i18n="navServices">Services</a>
+          <a href="#how" data-i18n="navHow">How it works</a>
+          <a href="#cases" data-i18n="navCases">Use cases</a>
+          <a href="#contact" data-i18n="navContact">Contact</a>
+        </nav>
+        <div class="lang-toggle" aria-label="Language switcher">
+          <button class="lang-btn active" id="lang-en" type="button">EN</button>
+          <button class="lang-btn" id="lang-ua" type="button">UA</button>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -427,33 +471,33 @@
     <section class="hero">
       <div class="wrap hero-grid">
         <div>
-          <div class="eyebrow">Telegram automation for modern businesses</div>
-          <h1>Clean bots. Faster replies. Zero lost requests.</h1>
-          <p class="lead">
+          <div class="eyebrow" data-i18n="eyebrow">Telegram automation for modern businesses</div>
+          <h1 data-i18n="heroTitle">Clean bots. Faster replies. Zero lost requests.</h1>
+          <p class="lead" data-i18n="heroLead">
             Telebotix Studio builds minimal Telegram bots that capture leads, structure inquiries, and help businesses respond faster without chaos in DMs and chats.
           </p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="https://t.me/o_s_h_t" target="_blank" rel="noopener noreferrer">Try demo bot</a>
-            <a class="btn btn-secondary" href="#cases">See use cases</a>
+            <a class="btn btn-primary" href="https://t.me/o_s_h_t" target="_blank" rel="noopener noreferrer" data-i18n="heroPrimary">Try demo bot</a>
+            <a class="btn btn-secondary" href="#cases" data-i18n="heroSecondary">See use cases</a>
           </div>
           <div class="hero-proof">
-            <span>Lead capture</span>
-            <span>Booking requests</span>
-            <span>Simple CRM flow</span>
+            <span data-i18n="proof1">Lead capture</span>
+            <span data-i18n="proof2">Booking requests</span>
+            <span data-i18n="proof3">Simple CRM flow</span>
           </div>
         </div>
 
         <div class="panel demo-panel">
           <div class="panel-head">
-            <div class="panel-label">Live bot preview</div>
-            <div class="panel-badge">Minimal. Fast. Trustworthy.</div>
+            <div class="panel-label" data-i18n="panelLabel">Live bot preview</div>
+            <div class="panel-badge" data-i18n="panelBadge">Minimal. Fast. Trustworthy.</div>
           </div>
           <div class="chat">
-            <div class="bubble bot">Welcome to Telebotix. Choose your business type.</div>
-            <div class="bubble user">Beauty / Salon</div>
-            <div class="bubble bot">What would you like to automate?</div>
-            <div class="bubble user">Appointment requests</div>
-            <div class="bubble bot">Perfect. Leave your contact and we’ll prepare the right bot flow.</div>
+            <div class="bubble bot" data-i18n="chat1">Welcome to Telebotix. Choose your business type.</div>
+            <div class="bubble user" data-i18n="chat2">Beauty / Salon</div>
+            <div class="bubble bot" data-i18n="chat3">What would you like to automate?</div>
+            <div class="bubble user" data-i18n="chat4">Appointment requests</div>
+            <div class="bubble bot" data-i18n="chat5">Perfect. Leave your contact and we’ll prepare the right bot flow.</div>
           </div>
         </div>
       </div>
@@ -461,25 +505,25 @@
 
     <section id="services">
       <div class="wrap">
-        <h2>What we build</h2>
-        <p class="section-copy">
+        <h2 data-i18n="servicesTitle">What we build</h2>
+        <p class="section-copy" data-i18n="servicesCopy">
           Practical Telegram bots for businesses that need better structure, faster response time, and a cleaner way to handle customer requests.
         </p>
         <div class="grid-3">
           <article class="card">
             <div class="icon">📥</div>
-            <h3>Lead capture bots</h3>
-            <p>Collect every inquiry in a structured way so no request gets lost between chats, DMs, and phone calls.</p>
+            <h3 data-i18n="servicesCard1Title">Lead capture bots</h3>
+            <p data-i18n="servicesCard1Text">Collect every inquiry in a structured way so no request gets lost between chats, DMs, and phone calls.</p>
           </article>
           <article class="card">
             <div class="icon">📅</div>
-            <h3>Booking & request flows</h3>
-            <p>Guide customers through simple questions for appointments, consultations, service requests, or product interest.</p>
+            <h3 data-i18n="servicesCard2Title">Booking & request flows</h3>
+            <p data-i18n="servicesCard2Text">Guide customers through simple questions for appointments, consultations, service requests, or product interest.</p>
           </article>
           <article class="card">
             <div class="icon">⚙️</div>
-            <h3>Custom business automation</h3>
-            <p>Adapt logic to your niche: support requests, product inquiries, internal workflows, and lightweight CRM-style handling.</p>
+            <h3 data-i18n="servicesCard3Title">Custom business automation</h3>
+            <p data-i18n="servicesCard3Text">Adapt logic to your niche: support requests, product inquiries, internal workflows, and lightweight CRM-style handling.</p>
           </article>
         </div>
       </div>
@@ -487,25 +531,25 @@
 
     <section id="how">
       <div class="wrap">
-        <h2>How it works</h2>
-        <p class="section-copy">
+        <h2 data-i18n="howTitle">How it works</h2>
+        <p class="section-copy" data-i18n="howCopy">
           The flow stays simple: the client interacts with the bot, the request gets structured automatically, and your business receives a clean lead immediately.
         </p>
         <div class="steps">
           <article class="card">
             <div class="step-number">1</div>
-            <h3>Client enters the bot</h3>
-            <p>The bot asks only the questions that matter, so the experience feels fast and natural.</p>
+            <h3 data-i18n="step1Title">Client enters the bot</h3>
+            <p data-i18n="step1Text">The bot asks only the questions that matter, so the experience feels fast and natural.</p>
           </article>
           <article class="card">
             <div class="step-number">2</div>
-            <h3>Request gets organized</h3>
-            <p>Contact data, business need, and intent are captured in a format your team can actually use.</p>
+            <h3 data-i18n="step2Title">Request gets organized</h3>
+            <p data-i18n="step2Text">Contact data, business need, and intent are captured in a format your team can actually use.</p>
           </article>
           <article class="card">
             <div class="step-number">3</div>
-            <h3>You receive the lead</h3>
-            <p>The request is sent to you instantly and can also be saved into a simple sheet for tracking and follow-up.</p>
+            <h3 data-i18n="step3Title">You receive the lead</h3>
+            <p data-i18n="step3Text">The request is sent to you instantly and can also be saved into a simple sheet for tracking and follow-up.</p>
           </article>
         </div>
       </div>
@@ -513,25 +557,25 @@
 
     <section id="cases">
       <div class="wrap">
-        <h2>Use cases</h2>
-        <p class="section-copy">
+        <h2 data-i18n="casesTitle">Use cases</h2>
+        <p class="section-copy" data-i18n="casesCopy">
           One strong base can be adapted for different niches. Here are a few of the most practical scenarios for early clients.
         </p>
         <div class="cases">
           <article class="card">
-            <div class="case-tag">Beauty / Salon</div>
-            <h3>Appointment request bot</h3>
-            <p>Collect service type, preferred date, and contact details instead of juggling scattered direct messages.</p>
+            <div class="case-tag" data-i18n="case1Tag">Beauty / Salon</div>
+            <h3 data-i18n="case1Title">Appointment request bot</h3>
+            <p data-i18n="case1Text">Collect service type, preferred date, and contact details instead of juggling scattered direct messages.</p>
           </article>
           <article class="card">
-            <div class="case-tag">Auto service</div>
-            <h3>Service inquiry flow</h3>
-            <p>Ask for vehicle type, issue, and preferred time so the team receives a clean request ready to process.</p>
+            <div class="case-tag" data-i18n="case2Tag">Auto service</div>
+            <h3 data-i18n="case2Title">Service inquiry flow</h3>
+            <p data-i18n="case2Text">Ask for vehicle type, issue, and preferred time so the team receives a clean request ready to process.</p>
           </article>
           <article class="card">
-            <div class="case-tag">Clinic / Local services</div>
-            <h3>Lead qualification bot</h3>
-            <p>Guide clients through a short pre-contact flow and send a structured inquiry directly to your business.</p>
+            <div class="case-tag" data-i18n="case3Tag">Clinic / Local services</div>
+            <h3 data-i18n="case3Title">Lead qualification bot</h3>
+            <p data-i18n="case3Text">Guide clients through a short pre-contact flow and send a structured inquiry directly to your business.</p>
           </article>
         </div>
       </div>
@@ -540,10 +584,10 @@
     <section>
       <div class="wrap panel cta">
         <div>
-          <h2 style="margin:0; font-size: clamp(28px, 4vw, 40px);">See the demo in action</h2>
-          <p>Open the bot, test the flow, and see how customer requests can be captured automatically.</p>
+          <h2 style="margin:0; font-size: clamp(28px, 4vw, 40px);" data-i18n="ctaTitle">See the demo in action</h2>
+          <p data-i18n="ctaText">Open the bot, test the flow, and see how customer requests can be captured automatically.</p>
         </div>
-        <a class="btn btn-primary" href="https://t.me/telebotix_demo_bot" target="_blank" rel="noopener noreferrer">Open demo bot</a>
+        <a class="btn btn-primary" href="https://t.me/telebotix_demo_bot" target="_blank" rel="noopener noreferrer" data-i18n="ctaButton">Open demo bot</a>
       </div>
     </section>
   </main>
@@ -551,12 +595,148 @@
   <footer class="footer" id="contact">
     <div class="wrap footer-grid">
       <div>
-        <strong>telebotix studio</strong><br />
-        Telegram bots for business automation.
+        <strong data-i18n="footerBrand">telebotix studio</strong><br />
+        <span data-i18n="footerText">Telegram bots for business automation.</span>
       </div>
       <div>
-        Telegram: <a href="https://t.me/o_s_h_t" target="_blank" rel="noopener noreferrer">@YOUR_TELEGRAM_USERNAME</a><br />
-        Email: <a href="mailto:telebotix.studio@gmail.com">telebotix.studio@gmail.com</a>
+        <span data-i18n="footerTelegram">Telegram:</span> <a href="https://t.me/o_s_h_t" target="_blank" rel="noopener noreferrer">Telebotix support</a><br />
+        <span data-i18n="footerEmail">Email:</span> <a href="mailto:telebotix.studio@gmail.com">telebotix.studio@gmail.com</a>
       </div>
     </div>
   </footer>
+
+  <script>
+    const translations = {
+      en: {
+        navServices: 'Services',
+        navHow: 'How it works',
+        navCases: 'Use cases',
+        navContact: 'Contact',
+        eyebrow: 'Telegram automation for modern businesses',
+        heroTitle: 'Clean bots. Faster replies. Zero lost requests.',
+        heroLead: 'Telebotix Studio builds minimal Telegram bots that capture leads, structure inquiries, and help businesses respond faster without chaos in DMs and chats.',
+        heroPrimary: 'Try demo bot',
+        heroSecondary: 'See use cases',
+        proof1: 'Lead capture',
+        proof2: 'Booking requests',
+        proof3: 'Simple CRM flow',
+        panelLabel: 'Live bot preview',
+        panelBadge: 'Minimal. Fast. Trustworthy.',
+        chat1: 'Welcome to Telebotix. Choose your business type.',
+        chat2: 'Beauty / Salon',
+        chat3: 'What would you like to automate?',
+        chat4: 'Appointment requests',
+        chat5: 'Perfect. Leave your contact and we’ll prepare the right bot flow.',
+        servicesTitle: 'What we build',
+        servicesCopy: 'Practical Telegram bots for businesses that need better structure, faster response time, and a cleaner way to handle customer requests.',
+        servicesCard1Title: 'Lead capture bots',
+        servicesCard1Text: 'Collect every inquiry in a structured way so no request gets lost between chats, DMs, and phone calls.',
+        servicesCard2Title: 'Booking & request flows',
+        servicesCard2Text: 'Guide customers through simple questions for appointments, consultations, service requests, or product interest.',
+        servicesCard3Title: 'Custom business automation',
+        servicesCard3Text: 'Adapt logic to your niche: support requests, product inquiries, internal workflows, and lightweight CRM-style handling.',
+        howTitle: 'How it works',
+        howCopy: 'The flow stays simple: the client interacts with the bot, the request gets structured automatically, and your business receives a clean lead immediately.',
+        step1Title: 'Client enters the bot',
+        step1Text: 'The bot asks only the questions that matter, so the experience feels fast and natural.',
+        step2Title: 'Request gets organized',
+        step2Text: 'Contact data, business need, and intent are captured in a format your team can actually use.',
+        step3Title: 'You receive the lead',
+        step3Text: 'The request is sent to you instantly and can also be saved into a simple sheet for tracking and follow-up.',
+        casesTitle: 'Use cases',
+        casesCopy: 'One strong base can be adapted for different niches. Here are a few of the most practical scenarios for early clients.',
+        case1Tag: 'Beauty / Salon',
+        case1Title: 'Appointment request bot',
+        case1Text: 'Collect service type, preferred date, and contact details instead of juggling scattered direct messages.',
+        case2Tag: 'Auto service',
+        case2Title: 'Service inquiry flow',
+        case2Text: 'Ask for vehicle type, issue, and preferred time so the team receives a clean request ready to process.',
+        case3Tag: 'Clinic / Local services',
+        case3Title: 'Lead qualification bot',
+        case3Text: 'Guide clients through a short pre-contact flow and send a structured inquiry directly to your business.',
+        ctaTitle: 'See the demo in action',
+        ctaText: 'Open the bot, test the flow, and see how customer requests can be captured automatically.',
+        ctaButton: 'Open demo bot',
+        footerBrand: 'telebotix studio',
+        footerText: 'Telegram bots for business automation.',
+        footerTelegram: 'Telegram:',
+        footerEmail: 'Email:'
+      },
+      ua: {
+        navServices: 'Послуги',
+        navHow: 'Як це працює',
+        navCases: 'Приклади',
+        navContact: 'Контакти',
+        eyebrow: 'Telegram-автоматизація для сучасного бізнесу',
+        heroTitle: 'Чисті боти. Швидші відповіді. Жодних втрачених заявок.',
+        heroLead: 'Telebotix Studio створює мінімалістичні Telegram-боти, які збирають ліди, структурують звернення та допомагають бізнесу відповідати швидше без хаосу в повідомленнях і чатах.',
+        heroPrimary: 'Спробувати демо-бота',
+        heroSecondary: 'Переглянути приклади',
+        proof1: 'Збір лідів',
+        proof2: 'Запити на запис',
+        proof3: 'Простий CRM-потік',
+        panelLabel: 'Попередній перегляд бота',
+        panelBadge: 'Мінімалістично. Швидко. Надійно.',
+        chat1: 'Вітаємо в Telebotix. Оберіть тип вашого бізнесу.',
+        chat2: 'Бʼюті / Салон',
+        chat3: 'Що саме ви хочете автоматизувати?',
+        chat4: 'Запити на запис',
+        chat5: 'Чудово. Залиште контакт, і ми підготуємо відповідний сценарій бота.',
+        servicesTitle: 'Що ми створюємо',
+        servicesCopy: 'Практичні Telegram-боти для бізнесів, яким потрібна краща структура, швидші відповіді та чистіший спосіб обробки звернень клієнтів.',
+        servicesCard1Title: 'Боти для збору лідів',
+        servicesCard1Text: 'Збирайте кожне звернення у структурованому вигляді, щоб нічого не губилось між чатами, директом і дзвінками.',
+        servicesCard2Title: 'Флоу для записів і заявок',
+        servicesCard2Text: 'Проводьте клієнта через прості запитання для запису, консультації, сервісного запиту або інтересу до товару.',
+        servicesCard3Title: 'Кастомна автоматизація для бізнесу',
+        servicesCard3Text: 'Адаптуємо логіку під вашу нішу: підтримка, товарні запити, внутрішні процеси та легка CRM-структура.',
+        howTitle: 'Як це працює',
+        howCopy: 'Усе просто: клієнт взаємодіє з ботом, запит автоматично структурується, а бізнес одразу отримує чистий лід.',
+        step1Title: 'Клієнт заходить у бота',
+        step1Text: 'Бот ставить лише потрібні запитання, тому весь процес виглядає швидко та природно.',
+        step2Title: 'Запит структурується',
+        step2Text: 'Контакти, потреба бізнесу та намір клієнта збираються у формат, який реально зручно використовувати.',
+        step3Title: 'Ви отримуєте ліда',
+        step3Text: 'Заявка одразу надсилається вам, а також може зберігатися в таблицю для контролю та follow-up.',
+        casesTitle: 'Приклади використання',
+        casesCopy: 'Одна сильна база легко адаптується під різні ніші. Ось кілька найпрактичніших сценаріїв для перших клієнтів.',
+        case1Tag: 'Бʼюті / Салон',
+        case1Title: 'Бот для запису',
+        case1Text: 'Збирайте тип послуги, бажану дату й контактні дані замість хаотичних повідомлень у директі.',
+        case2Tag: 'Автосервіс',
+        case2Title: 'Флоу для сервісних запитів',
+        case2Text: 'Питайте тип авто, проблему і зручний час, щоб команда отримувала чистий запит, готовий до обробки.',
+        case3Tag: 'Клініка / Локальні послуги',
+        case3Title: 'Бот для кваліфікації ліда',
+        case3Text: 'Проводьте клієнта через короткий флоу перед контактом і отримуйте структуроване звернення напряму в бізнес.',
+        ctaTitle: 'Подивіться демо в дії',
+        ctaText: 'Відкрийте бота, протестуйте сценарій і побачте, як заявки клієнтів можуть збиратися автоматично.',
+        ctaButton: 'Відкрити демо-бота',
+        footerBrand: 'telebotix studio',
+        footerText: 'Telegram-боти для автоматизації бізнесу.',
+        footerTelegram: 'Telegram:',
+        footerEmail: 'Email:'
+      }
+    };
+
+    function setLanguage(lang) {
+      document.documentElement.lang = lang;
+      localStorage.setItem('telebotix-lang', lang);
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+      document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+      document.getElementById('lang-ua').classList.toggle('active', lang === 'ua');
+    }
+
+    document.getElementById('lang-en').addEventListener('click', () => setLanguage('en'));
+    document.getElementById('lang-ua').addEventListener('click', () => setLanguage('ua'));
+
+    const savedLang = localStorage.getItem('telebotix-lang') || 'en';
+    setLanguage(savedLang);
+  </script>
+</body>
+</html>
