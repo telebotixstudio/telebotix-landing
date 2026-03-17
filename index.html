@@ -2,88 +2,561 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Telebotix — Telegram Bots for Business</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Telebotix Studio — Telegram Bots for Business</title>
+  <meta name="description" content="Telebotix Studio builds clean Telegram bots for lead capture, bookings, and business automation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: white;
-      text-align: center;
+    :root {
+      --bg: #0a0d14;
+      --bg-soft: #0f1422;
+      --card: rgba(255,255,255,0.06);
+      --card-strong: rgba(255,255,255,0.08);
+      --line: rgba(255,255,255,0.10);
+      --text: #eef2ff;
+      --muted: #a6b0c9;
+      --accent: #7c9cff;
+      --accent-2: #7ef0c3;
+      --accent-3: #bca7ff;
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --max: 1180px;
     }
 
-    .container {
-      padding: 60px 20px;
-      max-width: 800px;
-      margin: auto;
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(124,156,255,0.16), transparent 28%),
+        radial-gradient(circle at 85% 10%, rgba(126,240,195,0.12), transparent 24%),
+        radial-gradient(circle at 70% 80%, rgba(188,167,255,0.10), transparent 26%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(10,13,20,0.68);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 18px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-wordmark {
+      font-family: 'Manrope', 'Inter', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+    }
+
+    .brand-wordmark span {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 14px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 999px;
+      padding: 14px 20px;
+      font-weight: 700;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-3));
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.03);
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 82px 0 42px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.06fr 0.94fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 13px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.03);
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent-2), var(--accent));
+      box-shadow: 0 0 18px rgba(126,240,195,0.55);
     }
 
     h1 {
-      font-size: 42px;
-      margin-bottom: 20px;
+      margin: 0 0 16px;
+      font-family: 'Manrope', 'Inter', sans-serif;
+      font-size: clamp(42px, 7vw, 70px);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      max-width: 760px;
     }
 
-    p {
+    .lead {
+      margin: 0;
       font-size: 18px;
-      color: #cbd5f5;
-      margin-bottom: 30px;
+      color: var(--muted);
+      max-width: 680px;
     }
 
-    .btn {
-      background: #22c55e;
-      color: black;
-      padding: 14px 28px;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 8px;
-      display: inline-block;
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 26px;
     }
 
-    .section {
-      margin-top: 80px;
+    .hero-proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .hero-proof span::before {
+      content: "•";
+      color: var(--accent-2);
+      margin-right: 8px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+
+    .demo-panel {
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .demo-panel::after {
+      content: "";
+      position: absolute;
+      inset: auto -10% -40% auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(124,156,255,0.22), transparent 70%);
+      pointer-events: none;
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .panel-label {
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .panel-badge {
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 10px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .chat {
+      display: grid;
+      gap: 10px;
+    }
+
+    .bubble {
+      max-width: 88%;
+      padding: 12px 14px;
+      border-radius: 18px;
+      font-size: 14px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .bot {
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+    }
+
+    .user {
+      background: linear-gradient(135deg, rgba(124,156,255,0.26), rgba(188,167,255,0.22));
+      margin-left: auto;
+      color: #f8faff;
+    }
+
+    section {
+      padding: 40px 0;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-family: 'Manrope', 'Inter', sans-serif;
+      font-size: clamp(30px, 4vw, 42px);
+      letter-spacing: -0.04em;
+    }
+
+    .section-copy {
+      max-width: 760px;
+      color: var(--muted);
+      margin-bottom: 24px;
+      font-size: 17px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
     }
 
     .card {
-      background: #1e293b;
-      padding: 20px;
-      margin: 15px;
-      border-radius: 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
+      padding: 22px;
+    }
+
+    .icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(124,156,255,0.12);
+      border: 1px solid rgba(124,156,255,0.16);
+      font-size: 21px;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .step-number {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-3));
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .cases {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .case-tag {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 12px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 28px;
+    }
+
+    .cta p {
+      margin: 8px 0 0;
+      color: var(--muted);
+    }
+
+    .footer {
+      padding: 34px 0 48px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .footer-grid {
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .grid-3,
+      .steps,
+      .cases {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .nav-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        gap: 14px;
+      }
+
+      .hero {
+        padding-top: 56px;
+      }
     }
   </style>
 </head>
-
 <body>
-
-  <div class="container">
-    <h1>Automate Your Business with Telegram Bots</h1>
-    <p>
-      We build smart Telegram bots that capture leads, automate communication, and grow your business.
-    </p>
-
-    <a href="https://t.me/YOUR_BOT_USERNAME" class="btn">
-      Try Demo Bot
-    </a>
-
-    <div class="section">
-      <h2>What We Do</h2>
-
-      <div class="card">Lead Generation Bots</div>
-      <div class="card">Customer Support Automation</div>
-      <div class="card">Custom Business Workflows</div>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top">
+        <div class="brand-wordmark">telebotix <span>studio</span></div>
+      </a>
+      <nav class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#how">How it works</a>
+        <a href="#cases">Use cases</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
+  </header>
 
-    <div class="section">
-      <h2>How It Works</h2>
-      <p>1. User interacts with bot → 2. Bot collects data → 3. You get leads instantly</p>
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Telegram automation for modern businesses</div>
+          <h1>Clean bots. Faster replies. Zero lost requests.</h1>
+          <p class="lead">
+            Telebotix Studio builds minimal Telegram bots that capture leads, structure inquiries, and help businesses respond faster without chaos in DMs and chats.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://t.me/o_s_h_t" target="_blank" rel="noopener noreferrer">Try demo bot</a>
+            <a class="btn btn-secondary" href="#cases">See use cases</a>
+          </div>
+          <div class="hero-proof">
+            <span>Lead capture</span>
+            <span>Booking requests</span>
+            <span>Simple CRM flow</span>
+          </div>
+        </div>
+
+        <div class="panel demo-panel">
+          <div class="panel-head">
+            <div class="panel-label">Live bot preview</div>
+            <div class="panel-badge">Minimal. Fast. Trustworthy.</div>
+          </div>
+          <div class="chat">
+            <div class="bubble bot">Welcome to Telebotix. Choose your business type.</div>
+            <div class="bubble user">Beauty / Salon</div>
+            <div class="bubble bot">What would you like to automate?</div>
+            <div class="bubble user">Appointment requests</div>
+            <div class="bubble bot">Perfect. Leave your contact and we’ll prepare the right bot flow.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="wrap">
+        <h2>What we build</h2>
+        <p class="section-copy">
+          Practical Telegram bots for businesses that need better structure, faster response time, and a cleaner way to handle customer requests.
+        </p>
+        <div class="grid-3">
+          <article class="card">
+            <div class="icon">📥</div>
+            <h3>Lead capture bots</h3>
+            <p>Collect every inquiry in a structured way so no request gets lost between chats, DMs, and phone calls.</p>
+          </article>
+          <article class="card">
+            <div class="icon">📅</div>
+            <h3>Booking & request flows</h3>
+            <p>Guide customers through simple questions for appointments, consultations, service requests, or product interest.</p>
+          </article>
+          <article class="card">
+            <div class="icon">⚙️</div>
+            <h3>Custom business automation</h3>
+            <p>Adapt logic to your niche: support requests, product inquiries, internal workflows, and lightweight CRM-style handling.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="wrap">
+        <h2>How it works</h2>
+        <p class="section-copy">
+          The flow stays simple: the client interacts with the bot, the request gets structured automatically, and your business receives a clean lead immediately.
+        </p>
+        <div class="steps">
+          <article class="card">
+            <div class="step-number">1</div>
+            <h3>Client enters the bot</h3>
+            <p>The bot asks only the questions that matter, so the experience feels fast and natural.</p>
+          </article>
+          <article class="card">
+            <div class="step-number">2</div>
+            <h3>Request gets organized</h3>
+            <p>Contact data, business need, and intent are captured in a format your team can actually use.</p>
+          </article>
+          <article class="card">
+            <div class="step-number">3</div>
+            <h3>You receive the lead</h3>
+            <p>The request is sent to you instantly and can also be saved into a simple sheet for tracking and follow-up.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="cases">
+      <div class="wrap">
+        <h2>Use cases</h2>
+        <p class="section-copy">
+          One strong base can be adapted for different niches. Here are a few of the most practical scenarios for early clients.
+        </p>
+        <div class="cases">
+          <article class="card">
+            <div class="case-tag">Beauty / Salon</div>
+            <h3>Appointment request bot</h3>
+            <p>Collect service type, preferred date, and contact details instead of juggling scattered direct messages.</p>
+          </article>
+          <article class="card">
+            <div class="case-tag">Auto service</div>
+            <h3>Service inquiry flow</h3>
+            <p>Ask for vehicle type, issue, and preferred time so the team receives a clean request ready to process.</p>
+          </article>
+          <article class="card">
+            <div class="case-tag">Clinic / Local services</div>
+            <h3>Lead qualification bot</h3>
+            <p>Guide clients through a short pre-contact flow and send a structured inquiry directly to your business.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap panel cta">
+        <div>
+          <h2 style="margin:0; font-size: clamp(28px, 4vw, 40px);">See the demo in action</h2>
+          <p>Open the bot, test the flow, and see how customer requests can be captured automatically.</p>
+        </div>
+        <a class="btn btn-primary" href="https://t.me/telebotix_demo_bot" target="_blank" rel="noopener noreferrer">Open demo bot</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="contact">
+    <div class="wrap footer-grid">
+      <div>
+        <strong>telebotix studio</strong><br />
+        Telegram bots for business automation.
+      </div>
+      <div>
+        Telegram: <a href="https://t.me/o_s_h_t" target="_blank" rel="noopener noreferrer">@YOUR_TELEGRAM_USERNAME</a><br />
+        Email: <a href="mailto:telebotix.studio@gmail.com">telebotix.studio@gmail.com</a>
+      </div>
     </div>
-
-    <div class="section">
-      <h2>Contact</h2>
-      <p>Email: telebotix.studio@gmail.com</p>
-    </div>
-  </div>
-
-</body>
-</html>
+  </footer>
